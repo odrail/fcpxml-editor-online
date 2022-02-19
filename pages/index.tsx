@@ -1,10 +1,10 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from '../components/Image'
-import Link from 'next/link'
-import * as FileSaver from 'file-saver';
+// import type { NextPage } from 'next'
+// import Head from 'next/head'
+// import Image from '../components/Image'
+// import Link from 'next/link'
+import FileSaver from 'file-saver';
 import correggiTitoli from '../utils/correggi-titoli'
-import LoadButton from './components/loadButton'
+import LoadButton from './components/LoadButton'
 
 const handleOnInputFile = async (files: FileList | null) => {
   if (!files || files.length == 0) return
