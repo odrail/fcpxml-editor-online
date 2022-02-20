@@ -17,8 +17,7 @@ const getAssetClipOrClip = (jsonObj: any): string => {
   return jsonObj.fcpxml.library.event.project.sequence.spine['asset-clip'] ? 'asset-clip' : 'clip'
 }
 
-function correggiTitoli(xmlDataStr: string): string {
-  const jsonObj = xml.parse(xmlDataStr);
+function correggiTitoli(jsonObj: any): any {
   const assetClips = jsonObj.fcpxml.library.event.project.sequence.spine[getAssetClipOrClip(jsonObj)]
     .map((assetClip: any) => ({
       ...assetClip,
@@ -29,7 +28,7 @@ function correggiTitoli(xmlDataStr: string): string {
   jsonObj.fcpxml.library.event.project.sequence.spine[getAssetClipOrClip(jsonObj)] = assetClips
   const output = xml.build(jsonObj);
 
-  return correggiCaratteriSpeciali(output)
+  return xml.parse(correggiCaratteriSpeciali(output))
 
 }
 
