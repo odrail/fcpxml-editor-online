@@ -1,4 +1,5 @@
 import { CSSProperties } from "react"
+import { Button } from "react-bootstrap"
 import correggiTitoli from "../../../utils/correggi-titoli"
 
 type Props = {
@@ -14,12 +15,13 @@ const FixTitlesButton = ({ style, fcpxml, onClick }: Props) => {
     onClick && onClick(output)
   }
   return (
-    <button
+    <Button
       style={style}
       onClick={handleClick}
+      variant="warning"
     >
       Correggi Titoli
-    </button>
+    </Button>
   )
 }
 

@@ -1,3 +1,4 @@
+import getAssetClipOrClip from './getAssetClipOrClip'
 import * as xml from './xml'
 
 const fixTitles = (titles: any[]): any[] => {
@@ -7,14 +8,10 @@ const fixTitles = (titles: any[]): any[] => {
     text: t.text.map((text: any, i: number, array: any[]) => ({
       'text-style': {
         ...text['text-style'],
-        '#text': array[0]['text-style']['#text'].split('\n')[i]
+        '#text': array[0]['text-style']['#text'].split('\n')[i] || text['text-style']['#text']
       }
     }))
   }))
-}
-
-const getAssetClipOrClip = (jsonObj: any): string => {
-  return jsonObj.fcpxml.library.event.project.sequence.spine['asset-clip'] ? 'asset-clip' : 'clip'
 }
 
 function correggiTitoli(jsonObj: any): any {

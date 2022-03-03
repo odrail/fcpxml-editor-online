@@ -10,14 +10,20 @@ import * as xml from '../utils/xml'
 import { useState } from 'react';
 import FixTitlesButton from './components/FixTitlesButton';
 import ExportButton from './components/ExportButton';
+import ChangelogModal from './components/ChangelogModal'
+import fs from 'fs/promises'
 
-export default function Home() {
+type HomeProps = {
+  changelogMd: string,
+  currentVersion: string
+}
+
+export default function Home({ changelogMd, currentVersion }: HomeProps) {
   const [fcpxml, setFcpxml] = useState({})
 
   const handleOnInputFile = async (files: FileList | null) => {
     if (!files || files.length == 0) return
     if (files.item(0)) {
-      const fileName = files.item(0)?.name || "ciao"
       const fileText: string | undefined = await files.item(0)?.text()
       console.log('fileText', fileText)
       if (fileText) {
@@ -36,7 +42,8 @@ export default function Home() {
 
   return (
     <div>
-      <div style={{ display: 'inline-flex' }}>
+      <ChangelogModal changelogMd={changelogMd} currentVersion={currentVersion} />
+      <div style={{ display: 'inline-flex', marginBottom: '15px' }}>
         <LoadButton
           onChange={e => { handleOnInputFile(e.target.files); e.target.value = '' }}
           text="Carica fcpxml"
@@ -48,7 +55,9 @@ export default function Home() {
         />
       </div>
 
-      <div style={{ height: 'calc(100vh - 125 px)' }}>
+      <div style={{ 
+        // height: 'calc(100vh - 125 px)' 
+        }}>
         <ClipTable fcpxml={fcpxml} />
       </div>
       <ExportButton fcpxml={fcpxml} fileName='output.fcpxml' />
@@ -119,3 +128,17 @@ export default function Home() {
 // }
 
 // export default Home
+
+export async function getStaticProps() {
+  const [changelogMd, packageJson] = await Promise.all([
+    fs.readFile('./Changelog.md', { encoding: 'utf-8' }),
+    fs.readFile('./package.json', { encoding: 'utf8' })
+  ])
+
+  return {
+    props: {
+      changelogMd,
+      currentVersion: JSON.parse(packageJson).version
+    },
+  }
+}

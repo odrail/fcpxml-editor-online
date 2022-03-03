@@ -1,4 +1,5 @@
 import FileSaver from "file-saver";
+import { Button } from "react-bootstrap";
 import * as xml from '../../../utils/xml'
 
 type Props = {
@@ -14,7 +15,12 @@ const ExportButton = ({ fcpxml, fileName }: Props) => {
   }
 
   return (
-    <button onClick={handleClick}>Esporta fcpxml</button>
+    <Button
+      onClick={handleClick}
+      variant="success"
+    >
+      Esporta fcpxml
+    </Button>
   )
 }
 

@@ -1,4 +1,5 @@
 import { Table } from "react-bootstrap"
+import getAssetClipOrClip from "../../utils/getAssetClipOrClip"
 
 type Props = {
   fcpxml?: any
@@ -6,7 +7,7 @@ type Props = {
 
 const getTitles = (fcpxml: any) => {
   try {
-    return fcpxml.fcpxml.library.event.project.sequence.spine['asset-clip']
+    return fcpxml.fcpxml.library.event.project.sequence.spine[getAssetClipOrClip(fcpxml)]
       .reduce((acc: any, clip: any) => {
         clip.title.forEach((title: any) => {
           acc.push({
