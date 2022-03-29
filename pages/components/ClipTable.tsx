@@ -1,8 +1,9 @@
 import { Table } from "react-bootstrap"
+import { useAppSelector } from "../../app/hooks"
+import { selectFcpxml } from "../../features/fcpxml/fcpxmlSlice"
 import getAssetClipOrClip from "../../utils/getAssetClipOrClip"
 
 type Props = {
-  fcpxml?: any
 }
 
 const getTitles = (fcpxml: any) => {
@@ -23,7 +24,9 @@ const getTitles = (fcpxml: any) => {
   }
 }
 
-const ClipTable = ({ fcpxml }: Props) => {
+const ClipTable = ({}: Props) => {
+  const fcpxml = useAppSelector(selectFcpxml);
+  
   return (
     <div style={{
       overflowY: 'auto',
