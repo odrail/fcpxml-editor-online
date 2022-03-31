@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEventHandler, FormEventHandler, useState } from "react";
 import { CSSProperties } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useAppDispatch } from "../../../app/hooks";
@@ -24,13 +24,13 @@ const TrovaESostituisci: React.FC<Props> = ({ style }) => {
     setForm(statoIniziale)
   }
 
-  const handleOnSubmit = (event) => {
+  const handleOnSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault()
     dispatch(trovaESostituisci(form))
     handleClose()
   }
 
-  const handleOnChange = (event) => {
+  const handleOnChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     setForm(state => ({
       ...state,
       [event.target.name]: event.target.value
