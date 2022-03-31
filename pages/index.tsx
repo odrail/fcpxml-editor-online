@@ -8,6 +8,7 @@ import FixTitlesButton from './components/FixTitlesButton';
 import ExportButton from './components/ExportButton';
 import ChangelogModal from './components/ChangelogModal'
 import fs from 'fs/promises'
+import TrovaESostituisci from './components/TrovaESostituisci';
 
 type HomeProps = {
   changelogMd: string,
@@ -21,6 +22,8 @@ export default function Home({ changelogMd, currentVersion }: HomeProps) {
       <div style={{ display: 'inline-flex', marginBottom: '15px' }}>
         <LoadButton />
         <FixTitlesButton style={{ marginLeft: '15px' }} />
+        <TrovaESostituisci style={{ marginLeft: '15px' }} />
+        <ExportButton fileName='output.fcpxml' />
       </div>
 
       <div style={{ 
@@ -28,7 +31,6 @@ export default function Home({ changelogMd, currentVersion }: HomeProps) {
         }}>
         <ClipTable />
       </div>
-      <ExportButton fileName='output.fcpxml' />
     </div>
   )
 }

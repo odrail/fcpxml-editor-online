@@ -21,6 +21,7 @@ const ExportButton = ({ fileName }: Props) => {
     <Button
       onClick={handleClick}
       variant="success"
+      style={{ marginLeft: '15px' }}
     >
       Esporta fcpxml
     </Button>
