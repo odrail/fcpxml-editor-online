@@ -12,6 +12,7 @@ const LoadButton = ({ }: Props) => {
   
   const handleOnChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     handleOnInputFile(event.target.files)
+    event.target.value = ''
   }
 
   const handleOnInputFile = async (files: FileList | null) => {
