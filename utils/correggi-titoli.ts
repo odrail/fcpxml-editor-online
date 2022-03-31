@@ -15,18 +15,18 @@ const fixTitles = (titles: any[]): any[] => {
 }
 
 function correggiTitoli(jsonObj: any): any {
-  const assetClips = jsonObj.fcpxml.library.event.project.sequence.spine[getAssetClipOrClip(jsonObj)]
+  const jsonObjClone = JSON.parse(JSON.stringify(jsonObj))
+  const assetClips = jsonObjClone.fcpxml.library.event.project.sequence.spine[getAssetClipOrClip(jsonObjClone)]
     .map((assetClip: any) => ({
       ...assetClip,
       title: fixTitles(assetClip.title)
     })
     )
 
-  jsonObj.fcpxml.library.event.project.sequence.spine[getAssetClipOrClip(jsonObj)] = assetClips
-  const output = xml.build(jsonObj);
+  jsonObjClone.fcpxml.library.event.project.sequence.spine[getAssetClipOrClip(jsonObjClone)] = assetClips
+  const output = xml.build(jsonObjClone);
 
   return xml.parse(correggiCaratteriSpeciali(output))
-
 }
 
 function correggiCaratteriSpeciali(str: string): string {

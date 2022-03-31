@@ -1,18 +1,20 @@
 import { CSSProperties } from "react"
 import { Button } from "react-bootstrap"
+import { useAppDispatch, useAppSelector } from "../../../app/hooks"
+import { selectFcpxml, setFcpxml } from "../../../features/fcpxml/fcpxmlSlice"
 import correggiTitoli from "../../../utils/correggi-titoli"
 
 type Props = {
-  style?: CSSProperties,
-  fcpxml: any,
-  onClick?: Function
+  style?: CSSProperties
 }
 
-const FixTitlesButton = ({ style, fcpxml, onClick }: Props) => {
+const FixTitlesButton = ({ style }: Props) => {
+  const fcpxml = useAppSelector(selectFcpxml);
+  const dispatch = useAppDispatch();
+
   const handleClick = () => {
     const output: any = correggiTitoli(fcpxml)
-    console.log('output', output)
-    onClick && onClick(output)
+    dispatch(setFcpxml(output))
   }
   return (
     <Button
