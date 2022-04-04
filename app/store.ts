@@ -5,11 +5,13 @@ import {
 } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
 import fcpxmlReducer from '../features/fcpxml/fcpxmlSlice';
+import fileNameReducer from '../features/fileName/fileNameSlice';
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
-    fcpxml: fcpxmlReducer
+    fcpxml: fcpxmlReducer,
+    fileName: fileNameReducer,
   },
 });
 
