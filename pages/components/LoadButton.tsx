@@ -3,6 +3,7 @@ import { useAppDispatch } from '../../app/hooks'
 import { setFcpxml } from '../../features/fcpxml/fcpxmlSlice'
 import styles from './style.module.css'
 import * as xml from '../../utils/xml'
+import { setFileName } from '../../features/fileName/fileNameSlice'
 
 type Props = {
 }
@@ -18,11 +19,16 @@ const LoadButton = ({ }: Props) => {
   const handleOnInputFile = async (files: FileList | null) => {
     if (!files || files.length == 0) return
     if (files.item(0)) {
-      const fileText: string | undefined = await files.item(0)?.text()
+      const file: File | null = files.item(0);
+      if (!file) return
+      const fileText: string | undefined = await file.text()
+      const fileName: string = file.name
       if (fileText) {
         try {
           dispatch(setFcpxml(xml.parse(fileText)))
+          dispatch(setFileName(fileName))
         } catch (error) {
+          console.error('error', error)
           alert('File non valido')
         }
       }

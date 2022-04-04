@@ -23,7 +23,7 @@ export default function Home({ changelogMd, currentVersion }: HomeProps) {
         <LoadButton />
         <FixTitlesButton style={{ marginLeft: '15px' }} />
         <TrovaESostituisci style={{ marginLeft: '15px' }} />
-        <ExportButton fileName='output.fcpxml' />
+        <ExportButton />
       </div>
 
       <div style={{ 
