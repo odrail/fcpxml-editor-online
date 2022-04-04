@@ -1,3 +1,7 @@
+### v. 0.0.4 - 04/04/2022
+
+### Novità
+- Nome del file esportato uguale a quello importato
 ### v. 0.0.3 - 31/03/2022
 
 #### Novità
