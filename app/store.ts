@@ -6,6 +6,7 @@ import {
 import counterReducer from '../features/counter/counterSlice';
 import fcpxmlReducer from '../features/fcpxml/fcpxmlSlice';
 import fileNameReducer from '../features/fileName/fileNameSlice';
+import { getState, saveState } from './localstorage';
 
 export const store = configureStore({
   reducer: {
@@ -13,7 +14,10 @@ export const store = configureStore({
     fcpxml: fcpxmlReducer,
     fileName: fileNameReducer,
   },
+  preloadedState: getState()
 });
+
+store.subscribe(() => saveState(store.getState()));
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

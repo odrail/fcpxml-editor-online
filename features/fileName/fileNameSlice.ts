@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 
-const initialState: String = 'output.fcpxml';
+const initialState: string = 'output.fcpxml';
 
 export const fileNameSlice = createSlice({
   name: 'fileName',
   initialState,
   reducers: {
-    setFileName: (state, action: PayloadAction<String>) => action.payload,
+    setFileName: (state, action: PayloadAction<string>) => action.payload,
   }
 });
 
