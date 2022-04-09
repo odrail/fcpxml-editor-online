@@ -1,12 +1,17 @@
+import { useEffect, useState } from "react"
 import { Table } from "react-bootstrap"
 import { useAppSelector } from "../../app/hooks"
 import { selectFcpxml } from "../../features/fcpxml/fcpxmlSlice"
 import getAssetClipOrClip from "../../utils/getAssetClipOrClip"
 
+type Title = {
+  lang1: string,
+  lang2: string
+}
 type Props = {
 }
 
-const getTitles = (fcpxml: any) => {
+const extractTitles = (fcpxml: any): Title[] => {
   try {
     return fcpxml.fcpxml.library.event.project.sequence.spine[getAssetClipOrClip(fcpxml)]
       .reduce((acc: any, clip: any) => {
@@ -24,9 +29,14 @@ const getTitles = (fcpxml: any) => {
   }
 }
 
-const ClipTable = ({}: Props) => {
+const ClipTable = ({ }: Props) => {
   const fcpxml = useAppSelector(selectFcpxml);
-  
+  const [titles, setTitles] = useState<Title[]>([])
+
+  useEffect(() => {
+    setTitles(extractTitles(fcpxml));
+  }, [fcpxml])
+
   return (
     <div style={{
       overflowY: 'auto',
@@ -41,22 +51,17 @@ const ClipTable = ({}: Props) => {
           </tr>
         </thead>
         <tbody>
-          {getTitles(fcpxml).map((title: any, index: number) => (
+          {titles.map((title: any, index: number) => (
             <tr key={index}>
               <td>{index}</td>
               <td>{title.lang1}</td>
               <td>{title.lang2}</td>
             </tr>
           ))}
-          {/* <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-        </tr> */}
           {
-            getTitles(fcpxml).length === 0 &&
+            titles.length === 0 &&
             <tr>
-              <td colSpan={3}>Nessun elemento trovato</td>
+              <td colSpan={3} style={{ textAlign: 'center' }}>Nessun elemento trovato</td>
             </tr>
           }
         </tbody>

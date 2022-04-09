@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown'
+import { getVersion, setVersion } from '../../../app/localstorage'
 
 type Props = {
   changelogMd: string,
@@ -20,9 +21,9 @@ const ChangelogModal = ({ changelogMd, currentVersion }: Props): JSX.Element => 
   }, [])
 
   useEffect(() => {
-    const fcpxmlonlineeditorVerion = localStorage.getItem('fcpxmlonlineeditorVerion')
-    if (!fcpxmlonlineeditorVerion || fcpxmlonlineeditorVerion !== currentVersion) {
-      localStorage.setItem('fcpxmlonlineeditorVerion', currentVersion)
+    const fcpxmlonlineeditorVersion = getVersion()
+    if (!fcpxmlonlineeditorVersion || fcpxmlonlineeditorVersion !== currentVersion) {
+      setVersion(currentVersion)
       handleShow()
     }
   }, [currentVersion])  
