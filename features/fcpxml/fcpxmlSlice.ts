@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import correggiTitoliReducer from "./correggiTitoliReducer";
+import modificaTitoliRigaReducer from "./modificaTitoliRigaReducer";
 import trovaESostituisciReducer from "./trovaESostituisciReducer";
 
 export type FcpxmlState = {
@@ -19,6 +20,7 @@ export const fcpxmlSlice = createSlice({
     },
     trovaESostituisci: trovaESostituisciReducer,
     correggiTitoli: correggiTitoliReducer,
+    modificaTitoliRiga: modificaTitoliRigaReducer,
   }
 });
 
@@ -26,6 +28,7 @@ export const {
   setFcpxml,
   trovaESostituisci,
   correggiTitoli,
+  modificaTitoliRiga
 } = fcpxmlSlice.actions;
 
 // calling the above actions would be useless if we could not access the data in the state. So, we use something called a selector which allows us to select a value from the state.

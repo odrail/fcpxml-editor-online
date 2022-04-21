@@ -3,6 +3,7 @@ import { Table } from "react-bootstrap"
 import { useAppSelector } from "../../app/hooks"
 import { selectFcpxml } from "../../features/fcpxml/fcpxmlSlice"
 import getAssetClipOrClip from "../../utils/getAssetClipOrClip"
+import Row from "./ClipTable/Row"
 
 type Title = {
   lang1: string,
@@ -48,16 +49,11 @@ const ClipTable = ({ }: Props) => {
             <th>#</th>
             <th>Lingua 1</th>
             <th>Lingua 2</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          {titles.map((title: any, index: number) => (
-            <tr key={index}>
-              <td>{index}</td>
-              <td>{title.lang1}</td>
-              <td>{title.lang2}</td>
-            </tr>
-          ))}
+          {titles.map((title: any, index: number) => <Row key={index} index={index} title={title} />)}
           {
             titles.length === 0 &&
             <tr>
