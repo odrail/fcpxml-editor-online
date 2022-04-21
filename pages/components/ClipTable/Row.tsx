@@ -12,8 +12,8 @@ type Props = {
 const Row: React.FC<Props> = ({ index, title }) => {
   const dispatch = useAppDispatch();
   const [isEditable, setIsEditable] = useState<boolean>(false)
-  const [lang1, setLang1] = useState<string>(title.lang1 || '')
-  const [lang2, setLang2] = useState<string>(title.lang2 || '')
+  const [lang1, setLang1] = useState<string>(title?.lang1 || '')
+  const [lang2, setLang2] = useState<string>(title?.lang2 || '')
 
   const handleOnChange = (event: any) => {
     const name = event.target.name
